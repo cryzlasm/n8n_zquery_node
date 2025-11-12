@@ -1,0 +1,55 @@
+{
+  "name": "ZQuery JSON Input Example",
+  "nodes": [
+    {
+      "parameters": {
+        "jsonData": "[\n  {\"id\": 1, \"name\": \"John\", \"age\": 30, \"department\": \"Engineering\"},\n  {\"id\": 2, \"name\": \"Jane\", \"age\": 25, \"department\": \"Marketing\"},\n  {\"id\": 3, \"name\": \"Bob\", \"age\": 35, \"department\": \"Engineering\"}\n]",
+        "zquery": "filter department == \"Engineering\" | cut id,name,age"
+      },
+      "name": "ZQuery JSON Input",
+      "type": "zqueryJsonInput",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "result",
+              "value": "={{ $json }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "ZQuery JSON Input": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "tags": []
+}

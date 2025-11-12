@@ -1,0 +1,29 @@
+{
+  "name": "n8n-zquery-json-input",
+  "version": "1.0.0",
+  "description": "An n8n node for processing JSON data with zquery syntax",
+  "main": "dist/ZQueryJsonInput.node.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
+    "test": "echo \"No tests specified\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "n8n",
+    "node",
+    "json",
+    "zquery",
+    "input"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "n8n-core": "^1.0.0",
+    "n8n-workflow": "^1.0.0"
+  }
+}

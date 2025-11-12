@@ -1,0 +1,9 @@
+{
+  "name": "ZQuery JSON Input",
+  "description": "Process JSON data with zquery syntax using the zq command-line tool",
+  "icon": "zquery_icon.svg",
+  "categories": ["Data Input", "JSON Processing", "Data Transformation"],
+  "version": 1,
+  "author": "Your Name",
+  "license": "MIT"
+}

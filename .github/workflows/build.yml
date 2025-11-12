@@ -1,0 +1,68 @@
+name: Build and Validate
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.19.0]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm install --no-package-lock
+
+    - name: Check files before build
+      run: ls -la
+
+    - name: Build
+      run: npm run build
+
+    - name: Check files after build
+      run: ls -la dist/
+
+    - name: Run tests
+      run: npm test
+
+    - name: Type checking
+      run: npm run typecheck
+
+    - name: List dist directory for tag builds
+      run: |
+        echo "Dist directory contents:"
+        ls -la dist/
+        echo "Files in dist:"
+        find dist/ -type f
+
+    - name: Create Release Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: zquery-json-input-node
+        path: dist/**
+        retention-days: 5
+
+    - name: Create GitHub Release
+      if: github.ref_type == 'tag'
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref_name }}
+        release_name: ZQuery JSON Input Node ${{ github.ref_name }}
+        draft: false
+        prerelease: false
