@@ -93,6 +93,8 @@ export class ZQueryJsonInput implements INodeType {
         description: 'Enter your zquery statement here',
         typeOptions: {
           rows: 20,
+          editor: 'htmlEditor',
+          editorIsReadOnly: false,
         },
       },
     ],
