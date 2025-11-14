@@ -8,7 +8,7 @@ async function executeZQuery(jsonData: string, query: string): Promise<string> {
 
   return new Promise((resolve, reject) => {
     // Spawn zq process with proper stdin handling
-    const zq = spawn('zq', ['-j', query, '-']);
+    const zq = spawn('zq', ['-j', '-i', 'json', query, '-']);
 
     let stdout = '';
     let stderr = '';
